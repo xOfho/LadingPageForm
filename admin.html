@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Control y Verificación en Vivo | Administrador</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="apple-hig-root admin-bg">
+  <div class="admin-wrapper">
+    <header class="glass-nav">
+      <div class="nav-content">
+        <div class="brand">
+          <div class="brand-symbol admin-symbol">⚙️</div>
+          <span class="brand-title">Gestión de Recaudación (Admin)</span>
+        </div>
+        <div class="nav-status">
+          <span class="session-badge admin-badge">Modo Administrador</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-wrapper">
+      <!-- 1. Control del Temporizador de 3 Horas -->
+      <section class="glass-card mb-4">
+        <div class="admin-section-header">
+          <div>
+            <h3>Control de la Ventana de 3 Horas</h3>
+            <p class="small-text">Habilita o pausa el enlace de registro para los estudiantes cuando lo consideres necesario.</p>
+          </div>
+          <div class="admin-timer-status">
+            <span class="timer-label">Tiempo Restante del Enlace:</span>
+            <span id="admin-time-display" class="countdown-display">03:00:00</span>
+          </div>
+        </div>
+
+        <div class="admin-controls-grid">
+          <button id="btn-start-3h" class="pill-btn primary-btn">
+            ▶️ Iniciar / Reiniciar 3 Horas
+          </button>
+          <button id="btn-toggle-link" class="pill-btn secondary-btn">
+            ⏸️ Pausar / Desactivar Enlace
+          </button>
+          <button id="btn-copy-link" class="pill-btn secondary-btn">
+            🔗 Copiar Enlace para Donantes
+          </button>
+        </div>
+        <p id="link-state-msg" class="state-indicator mt-2"></p>
+      </section>
+
+      <!-- 2. Vinculación con Google Sheets -->
+      <section class="glass-card mb-4 sheets-integration-box">
+        <div class="integration-content">
+          <div>
+            <h4>📊 Sincronización con Google Sheets en Tiempo Real</h4>
+            <p class="small-text">Tu base de datos está activa en Google Drive. Puedes abrir la hoja para auditar o enviar registros vía Apps Script Webhook.</p>
+          </div>
+          <div class="integration-buttons">
+            <a id="btn-open-sheet" href="https://docs.google.com/spreadsheets/d/1oQRlwpwzzT4jWyTg8hOxabVBZbq1FXRJq_jrhawC2Gk/edit" target="_blank" class="pill-btn primary-btn">
+              Abrir Hoja de Cálculo en Drive ↗
+            </a>
+            <button id="btn-configure-webhook" class="pill-btn secondary-btn">
+              Configurar Webhook Apps Script
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Módulo de Búsqueda y Verificación en Vivo (Cobro y Entrega) -->
+      <section class="glass-card mb-4">
+        <div class="verification-header">
+          <div>
+            <h3>Módulo de Recepción y Verificación</h3>
+            <p class="small-text">Cuando la persona se acerque a entregar el dinero, búscala aquí por su Carnet, Código o Nombre para confirmar.</p>
+          </div>
+          <div class="quick-stats">
+            <div class="q-stat">
+              <span class="q-num" id="stat-total">0</span>
+              <span class="q-txt">Inscritos</span>
+            </div>
+            <div class="q-stat">
+              <span class="q-num text-green" id="stat-delivered">0</span>
+              <span class="q-txt">Entregados</span>
+            </div>
+            <div class="q-stat">
+              <span class="q-num text-orange" id="stat-pending">0</span>
+              <span class="q-txt">Pendientes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buscador Instantáneo -->
+        <div class="search-bar-wrapper">
+          <input type="text" id="donor-search" placeholder="🔍 Escribe Carnet, Nombre, Teléfono o Código..." />
+          <select id="filter-status">
+            <option value="ALL">Todos los Estados</option>
+            <option value="Pendiente">Pendientes de Pago</option>
+            <option value="Entregado">Aportes Entregados</option>
+          </select>
+        </div>
+
+        <!-- Tabla Interactiva -->
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Carnet</th>
+                <th>Nombre Completo</th>
+                <th>Teléfono</th>
+                <th>Grupo</th>
+                <th>Monto Est.</th>
+                <th>Estado Entrega</th>
+                <th>Monto Real Recibido</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Se actualiza en tiempo real -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admin-table-footer">
+          <button id="btn-export-csv" class="pill-btn secondary-btn">Descargar Copia Excel (CSV)</button>
+          <button id="btn-clear-db" class="pill-btn danger-btn">Limpiar Base Local</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

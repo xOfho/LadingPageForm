@@ -3,80 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Campaña Pajarito Azul | Solidaridad Estudiantil</title>
+  <title>Inscripción y Aporte Solidario | Convocatoria</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <!-- Tipografía estilo SF Pro / Apple Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="apple-hig-root">
-  <!-- Capa de Bloqueo Anti-Captura / Blockscreen Overlay -->
+  <!-- Cortina Anti-Captura / Blockscreen Overlay -->
   <div id="security-curtain" class="security-curtain" aria-hidden="true">
     <div class="security-message">
       <div class="security-icon">🔒</div>
-      <h2>Contenido Protegido</h2>
-      <p>Por políticas de privacidad, las capturas de pantalla e inspección visual externa están restringidas en esta sesión.</p>
+      <h2>Visualización Protegida</h2>
+      <p>Por políticas de privacidad, las capturas de pantalla, grabación o cambio de ventana están restringidas en este formulario.</p>
     </div>
   </div>
 
-  <!-- Contenedor Principal con efecto Apple Glass -->
   <div id="app-container" class="app-container">
-    
-    <!-- Navbar / Header minimalista -->
+    <!-- Navbar Minimalista Estilo Apple Glass -->
     <header class="glass-nav">
       <div class="nav-content">
         <div class="brand">
-          <svg class="bird-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8c0-3.3-2.7-6-6-6a6 6 0 0 0-5.8 4.5C2.5 7 1 8.8 1 11c0 3.3 2.7 6 6 6h10c3.3 0 6-2.7 6-6 0-2.8-1.9-5.1-4.5-5.8A6 6 0 0 0 16 8z"/>
-            <path d="M16 8l3-3m0 0l-3-3m3 3H9"/>
-            <circle cx="8" cy="9" r="1" fill="currentColor"/>
-          </svg>
-          <span class="brand-title">Pajarito Azul</span>
+          <div class="brand-symbol">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <span class="brand-title">Recaudación Solidaria</span>
         </div>
         <div class="nav-status">
-          <span class="pulse-dot"></span>
-          <span id="session-badge" class="session-badge">Activo</span>
+          <span id="session-dot" class="pulse-dot"></span>
+          <span id="session-badge" class="session-badge">Convocatoria Activa</span>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-wrapper">
-      
-      <!-- Banner Temporizador (Ventana de 3 Horas) -->
-      <section class="timer-banner-card">
+      <!-- Indicador de Tiempo Restante (Sincronizado con el Admin) -->
+      <section id="timer-bar" class="timer-banner-card">
         <div class="timer-info">
-          <span class="timer-label">Convocatoria con Tiempo Limitado</span>
+          <span class="timer-label">Ventana de Recepción Habilitada</span>
           <div class="countdown-display">
-            <span id="hours">02</span><span class="colon">:</span>
-            <span id="minutes">59</span><span class="colon">:</span>
-            <span id="seconds">59</span>
+            <span id="hours">00</span><span class="colon">:</span>
+            <span id="minutes">00</span><span class="colon">:</span>
+            <span id="seconds">00</span>
           </div>
-          <p class="timer-subtext">El enlace se desactiva automáticamente tras expirar la ventana de 3 horas.</p>
-        </div>
-        <div class="admin-quick-access">
-          <button id="admin-trigger-btn" class="pill-btn secondary-btn" title="Panel de Administración">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
-            Resultados (Admin)
-          </button>
+          <p class="timer-subtext">El formulario se desactiva de forma automática al expirar el tiempo programado.</p>
         </div>
       </section>
 
-      <!-- Pantalla cuando la convocatoria ha expirado -->
-      <section id="expired-view" class="card glass-card state-expired-view hidden">
+      <!-- Pantalla cuando la convocatoria ha expirado o el admin la pausó -->
+      <section id="expired-view" class="glass-card state-expired-view hidden">
         <div class="state-icon">⏳</div>
-        <h2>Enlace Finalizado</h2>
-        <p>El periodo de recolección de 3 horas ha concluido o el administrador ha cerrado la recepción de confirmaciones.</p>
-        <button id="expired-view-admin-btn" class="pill-btn primary-btn">Ingresar al Panel de Resultados</button>
+        <h2>Convocatoria Cerrada</h2>
+        <p>El enlace de registro no se encuentra habilitado en este momento o ha finalizado su periodo asignado.</p>
+        <p class="small-text mt-2">Ponte en contacto con el encargado de la recaudación si necesitas registrar tu aporte.</p>
       </section>
 
       <!-- Hero Section -->
       <section id="hero-section" class="hero-section">
-        <div class="badge-pill">Causa Benéfica &bull; Pajarito Azul</div>
-        <h1 class="hero-title">Cada aporte alza un nuevo vuelo.</h1>
+        <div class="badge-pill">Fondo Solidario • Apoyo Estudiantil</div>
+        <h1 class="hero-title">Confirmación de Aporte Voluntario</h1>
         <p class="hero-desc">
-          Únete a la campaña de recaudación solidaria. Confirma tu compromiso de apoyo en una plataforma segura y con resguardo de privacidad.
+          Registra tu intención de colaboración. Cuando acudas a entregar tu aporte en físico o digital, serás verificado al instante mediante tu número de carnet o código de comprobante.
         </p>
       </section>
 
@@ -84,16 +73,18 @@
       <section id="form-section" class="form-container">
         <div class="glass-card">
           <div class="card-header">
-            <h2 class="card-title">Confirmación de Aporte</h2>
-            <p class="card-subtitle">Completa tus datos para registrar tu intención de donación.</p>
+            <h2 class="card-title">Datos del Participante</h2>
+            <p class="card-subtitle">Completa tus datos para conciliar tu donación al momento de la entrega.</p>
           </div>
 
           <!-- Medidas de anonimato y restricciones -->
           <div class="privacy-notice">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
             <div>
-              <strong>Compromiso de Privacidad y Anonimato Parcial:</strong>
-              Tus datos de contacto se cifran localmente y solo el administrador de la recaudación tiene acceso al listado general para validar la entrega. No se publican en listas abiertas.
+              <strong>Protección y Registro Seguro:</strong>
+              Tus datos son almacenados en el repositorio privado de control en tiempo real. Nadie podrá ver la lista completa excepto la persona encargada de recibir las entregas.
             </div>
           </div>
 
@@ -101,7 +92,7 @@
             <!-- Carnet / Número de Estudiante -->
             <div class="form-group">
               <label for="studentId">Número de Carnet / Estudiante</label>
-              <input type="text" id="studentId" name="studentId" placeholder="Ej: 2021-0145U o 00012345" required />
+              <input type="text" id="studentId" name="studentId" placeholder="Ej: 2021-0145U o 0012345" required />
               <span class="error-msg" id="studentId-error"></span>
             </div>
 
@@ -123,15 +114,16 @@
               <!-- Grupo -->
               <div class="form-group col-half">
                 <label for="group">Grupo / Sección</label>
-                <input type="text" id="group" name="group" placeholder="Ej: 4T1-CO / 3M2-SIS" required />
+                <input type="text" id="group" name="group" placeholder="Ej: 4T1-SIS / 2M1-CO" required />
                 <span class="error-msg" id="group-error"></span>
               </div>
             </div>
 
             <!-- Monto Estimado Voluntario -->
             <div class="form-group">
-              <label for="amount">Monto Estimado de Aporte (Opcional - C$ o $)</label>
-              <input type="text" id="amount" name="amount" placeholder="Ej: C$ 100 o Voluntario el día de colecta" />
+              <label for="amount">Monto Estimado de Aporte (C$ o $)</label>
+              <input type="text" id="amount" name="amount" placeholder="Ej: C$ 100 / $5 / Aporte voluntario" required />
+              <span class="error-msg" id="amount-error"></span>
             </div>
 
             <!-- Check Obligatorio de Confirmación de Aporte -->
@@ -140,7 +132,7 @@
                 <input type="checkbox" id="commitmentCheck" name="commitmentCheck" required />
                 <span class="checkmark"></span>
                 <span class="checkbox-label">
-                  <strong>Sí, confirmo mi aporte voluntario</strong> para la causa benéfica de los pajaritos azules.
+                  <strong>Sí, confirmo formalmente mi compromiso de aporte voluntario</strong> para la presente causa solidaria.
                 </span>
               </label>
               <span class="error-msg" id="commitmentCheck-error"></span>
@@ -148,149 +140,68 @@
 
             <!-- Condiciones y Restricciones -->
             <div class="terms-card">
-              <h4>Condiciones y Términos de Participación:</h4>
+              <h4>Condiciones y Políticas de Registro:</h4>
               <ul>
-                <li><strong>Unicidad:</strong> Cada estudiante o donante puede realizar únicamente un registro activo por sesión.</li>
-                <li><strong>No Transferencia:</strong> El enlace responde a una ventana de tiempo predeterminada y su réplica masiva en bots queda bloqueada por huella digital del navegador.</li>
-                <li><strong>Protección de Privacidad:</strong> La visualización está protegida contra grabadores de pantalla y capturas en plataformas compatibles.</li>
-                <li><strong>Destino de Fondos:</strong> Los fondos serán auditados y entregados directamente a la causa correspondiente.</li>
+                <li><strong>Registro Único:</strong> Cada número de carnet solo puede tener un registro de compromiso activo.</li>
+                <li><strong>Validación de Entrega:</strong> Al momento de entregar el dinero en físico o vía transferencia, presenta tu código de comprobante generado.</li>
+                <li><strong>Seguridad de Pantalla:</strong> La captura o grabación de pantalla queda deshabilitada por medidas de privacidad.</li>
               </ul>
               
               <label class="custom-checkbox mt-3">
                 <input type="checkbox" id="termsCheck" name="termsCheck" required />
                 <span class="checkmark"></span>
-                <span class="checkbox-label">He leído y acepto las condiciones y restricciones estipuladas arriba.</span>
+                <span class="checkbox-label">He leído y acepto las condiciones de entrega y verificación.</span>
               </label>
               <span class="error-msg" id="termsCheck-error"></span>
             </div>
 
             <button type="submit" id="submit-btn" class="pill-btn primary-btn full-width">
-              <span>Registrar Aporte Solidario</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <span>Confirmar Mi Aporte Solidario</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
             </button>
           </form>
 
           <!-- Mensaje de Éxito / Comprobante -->
           <div id="success-box" class="success-box hidden">
             <div class="success-icon-badge">✓</div>
-            <h3>¡Inscripción Exitosa!</h3>
-            <p>Tu intención de aporte ha sido resguardada satisfactoriamente con código anónimo:</p>
-            <div class="token-badge" id="receipt-code">PB-938210</div>
-            <p class="small-text">Gracias por tu generosidad. Puedes cerrar esta ventana con total tranquilidad.</p>
+            <h3>¡Compromiso Registrado!</h3>
+            <p>Guarda este código para cuando pases a entregar tu aporte en físico o digital:</p>
+            <div class="token-badge" id="receipt-code">REC-000000</div>
+            <p class="small-text mt-3">Tu información ya fue enviada a la lista de verificación del administrador. Puedes cerrar esta ventana con total tranquilidad.</p>
           </div>
         </div>
       </section>
 
-      <!-- Características Destacadas (Apple 3-Column Glass) -->
+      <!-- Características Destacadas -->
       <section class="features-grid">
         <div class="feature-item">
           <div class="feature-icon">🛡️</div>
           <h3>Privacidad Estricta</h3>
-          <p>Tus datos son almacenados en un entorno protegido. No compartimos tu número ni carnet en tableros abiertos.</p>
+          <p>Tus datos son almacenados en un entorno protegido. No se publican en listas abiertas.</p>
         </div>
         <div class="feature-item">
           <div class="feature-icon">⏱️</div>
-          <h3>Ventana de 3 Horas</h3>
-          <p>Para mayor control y orden, el registro se cierra automáticamente tras finalizar la cuenta regresiva.</p>
+          <h3>Ventana de Tiempo</h3>
+          <p>Para mayor orden, el registro se cierra automáticamente tras finalizar la cuenta regresiva.</p>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">🐦</div>
+          <div class="feature-icon">🤝</div>
           <h3>Causa Solidaria</h3>
-          <p>Dedicado a la rehabilitación, alimentos y cuidado de las pequeñas aves en condición de vulnerabilidad.</p>
+          <p>Los fondos serán auditados y conciliados directamente por los encargados asignados.</p>
         </div>
       </section>
-
     </main>
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>© 2026 Campaña Pajarito Azul &bull; Diseñado bajo Apple Human Interface Guidelines</p>
-      <p class="footer-sub">Seguridad de sesión &bull; Pantalla protegida contra capturas &bull; Control centralizado</p>
+      <p>© 2026 Recaudación Solidaria Estudiantil • Diseñado bajo Apple Human Interface Guidelines</p>
+      <p class="footer-sub">Seguridad de sesión • Pantalla protegida contra capturas • Control centralizado</p>
     </footer>
-
-  </div>
-
-  <!-- MODAL: Panel de Administración & Resultados -->
-  <div id="admin-modal" class="modal-backdrop hidden">
-    <div class="modal-window glass-card">
-      <div class="modal-header">
-        <div>
-          <h3>Panel Administrativo & Resultados</h3>
-          <span class="modal-subtitle">Gestiona la duración del enlace y exporta los datos recolectados.</span>
-        </div>
-        <button id="close-admin-btn" class="close-icon-btn">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <!-- Control de Acceso / Password (por defecto: admin123) -->
-        <div id="admin-auth-view">
-          <p class="info-alert">Para ver los resultados o configurar la activación del link, ingresa la clave de acceso:</p>
-          <div class="form-group">
-            <input type="password" id="admin-pass-input" placeholder="Clave de acceso (Por defecto: admin123)" />
-            <span class="error-msg" id="admin-pass-error"></span>
-          </div>
-          <button id="btn-login-admin" class="pill-btn primary-btn full-width">Desbloquear Panel</button>
-        </div>
-
-        <!-- Vista Dashboard Admin -->
-        <div id="admin-dashboard-view" class="hidden">
-          <!-- Control del Temporizador de 3 Horas -->
-          <div class="admin-control-box">
-            <h4>Control del Enlace Activo</h4>
-            <div class="admin-btn-group">
-              <button id="btn-toggle-status" class="pill-btn secondary-btn">Desactivar Enlace Ahora</button>
-              <button id="btn-reset-timer" class="pill-btn secondary-btn">Reiniciar Ventana de 3 Horas</button>
-            </div>
-            <p id="admin-link-info" class="small-text mt-2"></p>
-          </div>
-
-          <!-- Estadísticas Rápidas -->
-          <div class="stats-row">
-            <div class="stat-card">
-              <span class="stat-number" id="total-registrations">0</span>
-              <span class="stat-label">Total Inscritos</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number" id="total-commitments">0</span>
-              <span class="stat-label">Aportes Confirmados</span>
-            </div>
-          </div>
-
-          <!-- Tabla de Resultados -->
-          <div class="table-container">
-            <h4>Registros Obtenidos:</h4>
-            <table class="data-table" id="results-table">
-              <thead>
-                <tr>
-                  <th>Hora</th>
-                  <th>Carnet</th>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>Grupo</th>
-                  <th>Monto</th>
-                  <th>Check</th>
-                </tr>
-              </thead>
-              <tbody id="results-table-body">
-                <!-- Se llena con JavaScript -->
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Acciones de Exportación -->
-          <div class="export-actions">
-            <button id="btn-export-csv" class="pill-btn primary-btn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Descargar Datos (CSV)
-            </button>
-            <button id="btn-clear-data" class="pill-btn danger-btn">Limpiar Datos</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script src="js/security.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/donor.js"></script>
 </body>
 </html>

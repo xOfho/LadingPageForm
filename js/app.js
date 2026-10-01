@@ -314,8 +314,7 @@
     }
 
     let csvContent = 'data:text/csv;charset=utf-8,';
-    csvContent += 'Código,Hora,Carnet,Nombre Completo,Teléfono,Grupo,Monto,Aporte Confirmado
-';
+    csvContent += 'Código,Hora,Carnet,Nombre Completo,Teléfono,Grupo,Monto,Aporte Confirmado';
 
     records.forEach((r) => {
       csvContent += `"${r.id}","${r.timestamp}","${r.studentId}","${r.fullName}","${r.phone}","${r.group}","${r.amount}","SÍ"
