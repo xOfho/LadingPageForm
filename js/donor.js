@@ -8,6 +8,7 @@
   // 👉 PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Terminada en /exec):
   const FIXED_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzw5kHWwnNmvW9AnmDfV0jGgs3Zz0QvI70Q5Y4cAVJZ2s-gQxm0udUEij-XTwcHk6US/exec'; 
 
+  
   const heroSection = document.getElementById('hero-section');
   const formSection = document.getElementById('form-section');
   const expiredView = document.getElementById('expired-view');
