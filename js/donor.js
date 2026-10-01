@@ -1,9 +1,12 @@
 /**
- * donor.js - Lógica del Portal del Donante
+ * donor.js - Participante con conexión centralizada
  */
 (function () {
   const STORAGE_KEY_CONFIG = 'fundraiser_config_state';
   const STORAGE_KEY_RECORDS = 'fundraiser_donor_records';
+
+  // 👉 PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Terminada en /exec):
+  const FIXED_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzw5kHWwnNmvW9AnmDfV0jGgs3Zz0QvI70Q5Y4cAVJZ2s-gQxm0udUEij-XTwcHk6US/exec'; 
 
   const heroSection = document.getElementById('hero-section');
   const formSection = document.getElementById('form-section');
@@ -19,19 +22,18 @@
   const successBox = document.getElementById('success-box');
   const receiptCodeEl = document.getElementById('receipt-code');
 
-  function checkLinkStatus() {
-    const raw = localStorage.getItem(STORAGE_KEY_CONFIG);
-    let config = raw ? JSON.parse(raw) : null;
+  function checkStatus() {
+    const rawConfig = localStorage.getItem(STORAGE_KEY_CONFIG);
+    let config = rawConfig ? JSON.parse(rawConfig) : null;
 
     if (!config) {
-      const now = Date.now();
-      config = { isActive: true, expiresAt: now + (3 * 60 * 60 * 1000) };
+      config = { masterActive: true, expiresAt: Date.now() + (3 * 3600 * 1000) };
       localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
     }
 
-    const remaining = config.expiresAt - Date.now();
+    const rem = config.expiresAt - Date.now();
 
-    if (!config.isActive || remaining <= 0) {
+    if (config.masterActive === false || rem <= 0) {
       hoursEl.textContent = '00';
       minutesEl.textContent = '00';
       secondsEl.textContent = '00';
@@ -52,7 +54,7 @@
       sessionBadge.style.backgroundColor = 'rgba(52, 199, 89, 0.12)';
       if (sessionDot) sessionDot.style.backgroundColor = '#34c759';
 
-      const sec = Math.floor(remaining / 1000);
+      const sec = Math.floor(rem / 1000);
       const h = Math.floor(sec / 3600);
       const m = Math.floor((sec % 3600) / 60);
       const s = sec % 60;
@@ -63,8 +65,8 @@
     }
   }
 
-  setInterval(checkLinkStatus, 1000);
-  checkLinkStatus();
+  setInterval(checkStatus, 1000);
+  checkStatus();
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -79,43 +81,20 @@
     const termsCheck = document.getElementById('termsCheck').checked;
 
     let hasError = false;
-
-    if (!studentId) {
-      document.getElementById('studentId-error').textContent = 'El carnet o ID de estudiante es obligatorio.';
-      hasError = true;
-    }
-    if (!fullName || fullName.length < 3) {
-      document.getElementById('fullName-error').textContent = 'Ingresa tu nombre y apellido completo.';
-      hasError = true;
-    }
-    if (!phone || phone.length < 8) {
-      document.getElementById('phone-error').textContent = 'Ingresa un número de contacto válido.';
-      hasError = true;
-    }
-    if (!group) {
-      document.getElementById('group-error').textContent = 'Especifica tu grupo o sección académica.';
-      hasError = true;
-    }
-    if (!amount) {
-      document.getElementById('amount-error').textContent = 'Ingresa el monto estimado de tu aporte.';
-      hasError = true;
-    }
-    if (!commitmentCheck) {
-      document.getElementById('commitmentCheck-error').textContent = 'Debes marcar el check de compromiso de aporte.';
-      hasError = true;
-    }
-    if (!termsCheck) {
-      document.getElementById('termsCheck-error').textContent = 'Debes aceptar las condiciones para continuar.';
-      hasError = true;
-    }
+    if (!studentId) { document.getElementById('studentId-error').textContent = 'Carnet obligatorio.'; hasError = true; }
+    if (!fullName || fullName.length < 3) { document.getElementById('fullName-error').textContent = 'Nombre completo requerido.'; hasError = true; }
+    if (!phone || phone.length < 8) { document.getElementById('phone-error').textContent = 'Teléfono válido requerido.'; hasError = true; }
+    if (!group) { document.getElementById('group-error').textContent = 'Grupo requerido.'; hasError = true; }
+    if (!amount) { document.getElementById('amount-error').textContent = 'Monto estimado requerido.'; hasError = true; }
+    if (!commitmentCheck) { document.getElementById('commitmentCheck-error').textContent = 'Debes confirmar tu compromiso.'; hasError = true; }
+    if (!termsCheck) { document.getElementById('termsCheck-error').textContent = 'Debes aceptar las condiciones.'; hasError = true; }
 
     if (hasError) return;
 
-    const rawRecords = localStorage.getItem(STORAGE_KEY_RECORDS);
-    const records = rawRecords ? JSON.parse(rawRecords) : [];
-    const exists = records.find((r) => r.studentId.toUpperCase() === studentId.toUpperCase());
-    if (exists) {
-      document.getElementById('studentId-error').textContent = 'Este número de carnet ya tiene una inscripción confirmada.';
+    const rawRecs = localStorage.getItem(STORAGE_KEY_RECORDS);
+    const records = rawRecs ? JSON.parse(rawRecs) : [];
+    if (records.find((r) => r.studentId.toUpperCase() === studentId.toUpperCase())) {
+      document.getElementById('studentId-error').textContent = 'Este carnet ya tiene un registro confirmado.';
       return;
     }
 
@@ -139,14 +118,14 @@
     records.push(newRecord);
     localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(records));
 
-    const webhookUrl = localStorage.getItem('fundraiser_sheets_webhook');
-    if (webhookUrl) {
+    const webhookUrl = FIXED_WEBHOOK_URL || localStorage.getItem('fundraiser_sheets_webhook');
+    if (webhookUrl && webhookUrl.startsWith('http')) {
       fetch(webhookUrl, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRecord)
-      }).catch((err) => console.log('Apps Script:', err));
+      }).catch((err) => console.log('Apps Script Webhook Error:', err));
     }
 
     form.classList.add('hidden');
