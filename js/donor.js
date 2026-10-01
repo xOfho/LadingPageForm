@@ -8,7 +8,7 @@
   // 👉 PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Terminada en /exec):
   const FIXED_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzw5kHWwnNmvW9AnmDfV0jGgs3Zz0QvI70Q5Y4cAVJZ2s-gQxm0udUEij-XTwcHk6US/exec'; 
 
-  
+
   const heroSection = document.getElementById('hero-section');
   const formSection = document.getElementById('form-section');
   const expiredView = document.getElementById('expired-view');
@@ -119,12 +119,13 @@
     records.push(newRecord);
     localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(records));
 
-    const webhookUrl = FIXED_WEBHOOK_URL || localStorage.getItem('fundraiser_sheets_webhook');
+ const webhookUrl = FIXED_WEBHOOK_URL || localStorage.getItem('fundraiser_sheets_webhook');
     if (webhookUrl && webhookUrl.startsWith('http')) {
+
       fetch(webhookUrl, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(newRecord)
       }).catch((err) => console.log('Apps Script Webhook Error:', err));
     }
